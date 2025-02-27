@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from "react";
+import  { useState } from "react";
 import axios from 'axios';
-const arrowSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="14"><path fill="none" stroke="#FFF" stroke-width="3" d="M2 1l6 6-6 6"/></svg>`;
-const dataUrl = `data:image/svg+xml,${encodeURIComponent(arrowSvg)}`;
-
+import MapComponent from "../../components/map/map";
 export default function Tracker() {
+    const arrowSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="11" height="14"><path fill="none" stroke="#FFF" stroke-width="3" d="M2 1l6 6-6 6"/></svg>`;
+    const dataUrl = `data:image/svg+xml,${encodeURIComponent(arrowSvg)}`;
     const [ipAddress, setIPAddress] = useState('');
     const [location, setLocation] = useState('');
     const [timezone, setTimezone] = useState('');
     const [isp, setISP] = useState('');
+    const baseUrl = process.env.REACT_APP_BASE_URL;
+    const apiKey = process.env.REACT_APP_API_KEY;
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.get(`https://geo.ipify.org/api/v2/country?apiKey=at_ZxIPaYT8ctW8S0zlJazfPprK3gRr3&ipAddress=${ipAddress}`);
+          const response = await axios.get(`${baseUrl}/api/v2/country?apiKey=${apiKey}&ipAddress=${ipAddress}`);
           const { ip, location, isp } = response.data;
           setIPAddress(ip);
           setLocation(` ${location.region}, ${location.country}`);
@@ -31,8 +35,9 @@ export default function Tracker() {
                 </h1>
                 <form
                     onSubmit={handleSubmit}
-                    className=" absolute top-[20%] lg:left-[40%] sm:left-[15%] mx-auto"
+                    className=" absolute top-[25%] lg:left-[40%] sm:left-[15%] mx-auto"
                 >
+                    <div className="flex">
                     <input
                         type="text" placeholder="Search for any IP address or domain"
                         value={ipAddress}
@@ -43,9 +48,10 @@ export default function Tracker() {
                     <button className="bg-primary-darkgray h-10 w-10 px-[3%] rounded-r-lg">
                         <img src={dataUrl} alt="arrowSvg" />
                     </button>
+                    </div>
                 </form>
                 <div
-                    className="absolute w-[85%] lg:h-36 sm:h-[45vh] bg-white mx-[8%] rounded-lg lg:top-[75%] sm:top-[50%] flex lg:flex-row sm:flex-col p-[3%]"
+                    className="absolute w-[85%] lg:h-36 sm:h-[455px] bg-white mx-[8%] rounded-lg lg:top-[75%] sm:top-[50%] flex lg:flex-row sm:flex-col p-[3%] z-50"
                 >
                     <div className="lg:border-r-2 lg:border-solid lg:border-primary-gray lg:h-[85%] w-[25%] lg:mx-[3%] sm:mx-auto sm:mb-[4%]">
                         <h2 className="text-primary-gray font-bold "> IP ADDRESS</h2>
@@ -65,8 +71,9 @@ export default function Tracker() {
                     </div>
                 </div>
             </div>
-            <div className="h-[65vh] w-screen bg-red-500"> 
-            <img src="assets/Images/GoogleMapTA.webp" className="w-full h-full"/>   
+            <div className="h-fit w-screen "> 
+                <MapComponent />
+            {/* <img src="assets/Images/GoogleMapTA.webp" className="w-full h-full"/>    */}
             </div>
         </div>
     )
