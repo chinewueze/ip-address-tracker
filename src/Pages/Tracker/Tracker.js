@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import axios from 'axios';
 import MapComponent from "../../components/map/map";
 export default function Tracker() {
@@ -15,43 +15,42 @@ export default function Tracker() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.get(`${baseUrl}/api/v2/country?apiKey=${apiKey}&ipAddress=${ipAddress}`);
-          const { ip, location, isp } = response.data;
-          setIPAddress(ip);
-          setLocation(` ${location.region}, ${location.country}`);
-          setTimezone(location.timezone);
-          setISP(isp);
+            const response = await axios.get(`${baseUrl}/api/v2/country?apiKey=${apiKey}&ipAddress=${ipAddress}`);
+            const { ip, location, isp } = response.data;
+            setIPAddress(ip);
+            setLocation(` ${location.region}, ${location.country}`);
+            setTimezone(location.timezone);
+            setISP(isp);
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
-      };
+    };
     return (
         <div>
-            <div className="h-[35vh]  w-[100vw]  relative" >
-                <img src="assets/Images/pattern-bg-desktop.png" className="w-full h-full lg:block sm:hidden" />
-                <img src="assets/Images/pattern-bg-mobile.png" className=" w-full h-full lg:hidden" />
-                <h1 className="absolute top-[5%] right-[43%] font-bold text-white text-2xl mx-auto">
+            <div className={`flex flex-col items-center justify-center gap-[45px] h-[35vh]  w-[100vw]  lg:bg-[url(/public/assets/Images/pattern-bg-desktop.png)] sm:bg-[url(/public/assets/Images/pattern-bg-mobile.png)] bg-cover bg-center`}>
+                <h1 className=" top-[5%] right-[43%] font-bold text-white text-2xl mx-auto">
                     IP Address Tracker
                 </h1>
+                <div>
                 <form
                     onSubmit={handleSubmit}
-                    className=" absolute top-[25%] lg:left-[40%] sm:left-[15%] mx-auto"
                 >
                     <div className="flex">
-                    <input
-                        type="text" placeholder="Search for any IP address or domain"
-                        value={ipAddress}
-                        onChange={(e) => setIPAddress(e.target.value)}
+                        <input
+                            type="text" placeholder="Search for any IP address or domain"
+                            value={ipAddress}
+                            onChange={(e) => setIPAddress(e.target.value)}
 
-                        className="h-10 lg:w-80 sm:w-72 rounded-l-lg outline-none p-3"
-                    />
-                    <button className="bg-primary-darkgray h-10 w-10 px-[3%] rounded-r-lg">
-                        <img src={dataUrl} alt="arrowSvg" />
-                    </button>
+                            className="h-10 lg:w-80 sm:w-72 rounded-l-lg outline-none p-3"
+                        />
+                        <button className="bg-primary-darkgray h-10 w-10 px-[3%] rounded-r-lg">
+                            <img src={dataUrl} alt="arrowSvg" />
+                        </button>
                     </div>
                 </form>
+                </div>
                 <div
-                    className="absolute w-[85%] lg:h-36 sm:h-[455px] bg-white mx-[8%] rounded-lg lg:top-[75%] sm:top-[50%] flex lg:flex-row sm:flex-col p-[3%] z-50"
+                    className=" w-[85%] lg:h-36 sm:h-[455px] bg-white rounded-lg flex lg:flex-row sm:flex-col p-[3%] "
                 >
                     <div className="lg:border-r-2 lg:border-solid lg:border-primary-gray lg:h-[85%] w-[25%] lg:mx-[3%] sm:mx-auto sm:mb-[4%]">
                         <h2 className="text-primary-gray font-bold "> IP ADDRESS</h2>
@@ -71,9 +70,8 @@ export default function Tracker() {
                     </div>
                 </div>
             </div>
-            <div className="h-fit w-screen "> 
+            <div className="h-fit w-screen ">
                 <MapComponent />
-            {/* <img src="assets/Images/GoogleMapTA.webp" className="w-full h-full"/>    */}
             </div>
         </div>
     )
