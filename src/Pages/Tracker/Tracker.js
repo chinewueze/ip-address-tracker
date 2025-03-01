@@ -51,7 +51,7 @@ export default function Tracker() {
                 </div>
             </div>
                 <div
-                    className="absolute top-[34%] z-40 w-[85%] lg:h-36 sm:h-[455px] bg-white rounded-lg flex lg:flex-row sm:flex-col p-[3%] p"
+                    className="absolute lg:top-[34%] sm:top-[28.55%] z-10 w-[85%] lg:h-36 sm:h-[425px] bg-white rounded-lg flex lg:flex-row sm:flex-col p-[3%] p"
                 >
                     <div className="lg:border-r-2 lg:border-solid lg:border-primary-gray lg:h-[85%] w-[25%] lg:mx-[3%] sm:mx-auto sm:mb-[4%]">
                         <h2 className="text-primary-gray font-bold "> IP ADDRESS</h2>
