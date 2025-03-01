@@ -26,8 +26,8 @@ export default function Tracker() {
         }
     };
     return (
-        <div>
-            <div className={`flex flex-col items-center justify-center gap-[45px] h-[35vh]  w-[100vw]  lg:bg-[url(/public/assets/Images/pattern-bg-desktop.png)] sm:bg-[url(/public/assets/Images/pattern-bg-mobile.png)] bg-cover bg-center`}>
+        <div className="relative flex flex-col items-center">
+            <div className={`flex flex-col items-center justify-center gap-[35px] h-[35vh]  w-[100vw]  lg:bg-[url(/public/assets/Images/pattern-bg-desktop.png)] sm:bg-[url(/public/assets/Images/pattern-bg-mobile.png)] bg-cover bg-center`}>
                 <h1 className=" top-[5%] right-[43%] font-bold text-white text-2xl mx-auto">
                     IP Address Tracker
                 </h1>
@@ -49,8 +49,9 @@ export default function Tracker() {
                     </div>
                 </form>
                 </div>
+            </div>
                 <div
-                    className=" w-[85%] lg:h-36 sm:h-[455px] bg-white rounded-lg flex lg:flex-row sm:flex-col p-[3%] "
+                    className="absolute top-[34%] z-40 w-[85%] lg:h-36 sm:h-[455px] bg-white rounded-lg flex lg:flex-row sm:flex-col p-[3%] p"
                 >
                     <div className="lg:border-r-2 lg:border-solid lg:border-primary-gray lg:h-[85%] w-[25%] lg:mx-[3%] sm:mx-auto sm:mb-[4%]">
                         <h2 className="text-primary-gray font-bold "> IP ADDRESS</h2>
@@ -69,7 +70,6 @@ export default function Tracker() {
                         <h1 className="font-bold text-xl"> {isp} </h1>
                     </div>
                 </div>
-            </div>
             <div className="h-fit w-screen ">
                 <MapComponent />
             </div>
